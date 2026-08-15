@@ -1,0 +1,6 @@
+{
+  "name": "Our Love Story Diary",
+  "description": "A simple and sweet romantic scrapbook diary featuring photos together and a surprise love letter at the end.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

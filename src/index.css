@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-handwritten {
+    font-family: 'Caveat', 'Patrick Hand', cursive;
+  }
+  .font-romantic {
+    font-family: 'Dancing Script', cursive;
+  }
+  .font-body {
+    font-family: 'Nunito', 'Quicksand', sans-serif;
+  }
+  .font-heading {
+    font-family: 'Quicksand', sans-serif;
+  }
+}
+
+/* Vibrant Palette Custom Themes */
+:root {
+  --vibrant-bg: #FFF0F5;
+  --vibrant-hot-pink: #FF69B4;
+  --vibrant-deep-pink: #FF1493;
+  --vibrant-violet-red: #C71585;
+  --vibrant-pale-violet: #DB7093;
+  --vibrant-border-pink: #FFB6C1;
+}
+
+/* Custom romantic background patterns */
+.bg-vibrant-canvas {
+  background-color: #FFF0F5;
+}
+
+.bg-diary-grid {
+  background-image: radial-gradient(rgba(255, 105, 180, 0.22) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+.bg-lined-paper {
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    rgba(255, 182, 193, 0.45) 28px
+  );
+}
+
+.washi-tape-vibrant {
+  background-color: rgba(255, 182, 193, 0.9);
+  box-shadow: 0 2px 4px rgba(199, 21, 133, 0.15);
+  border-left: 2px dashed rgba(255, 105, 180, 0.7);
+  border-right: 2px dashed rgba(255, 105, 180, 0.7);
+}
+
+.washi-tape-gold {
+  background-color: rgba(255, 250, 205, 0.95);
+  box-shadow: 0 2px 4px rgba(199, 21, 133, 0.12);
+  border-left: 2px dashed rgba(234, 179, 8, 0.6);
+  border-right: 2px dashed rgba(234, 179, 8, 0.6);
+}
+
+/* 3D perspective for book */
+.perspective-1000 {
+  perspective: 1200px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Floating animation keyframes */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(3deg);
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-2deg);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(255, 20, 147, 0.85);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-float-gentle {
+  animation: floatGentle 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar in vibrant hot pink */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFF0F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF69B4;
+  border-radius: 9999px;
+  border: 2px solid #FFF0F5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF1493;
+}
