@@ -5,60 +5,72 @@
     font-family: 'Caveat', 'Patrick Hand', cursive;
   }
   .font-romantic {
+    font-family: 'Playfair Display', 'Dancing Script', serif;
+  }
+  .font-script {
     font-family: 'Dancing Script', cursive;
   }
+  .font-serif-vintage {
+    font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  }
   .font-body {
-    font-family: 'Nunito', 'Quicksand', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Quicksand', sans-serif;
   }
   .font-heading {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Playfair Display', serif;
   }
 }
 
-/* Vibrant Palette Custom Themes */
+/* Bright & Vibrant Romantic Pink Palette */
 :root {
-  --vibrant-bg: #FFF0F5;
-  --vibrant-hot-pink: #FF69B4;
-  --vibrant-deep-pink: #FF1493;
-  --vibrant-violet-red: #C71585;
-  --vibrant-pale-violet: #DB7093;
-  --vibrant-border-pink: #FFB6C1;
+  --pink-bright: #FF1493;
+  --pink-hot: #FF69B4;
+  --pink-soft: #FFB6C1;
+  --pink-light: #FFF0F5;
+  --pink-bubblegum: #FF85A2;
+  --sunshine-yellow: #FFD700;
+  --sunflower-gold: #F59E0B;
 }
 
-/* Custom romantic background patterns */
-.bg-vibrant-canvas {
+/* Bright glowing pink background pattern */
+.bg-bright-pink-canvas {
   background-color: #FFF0F5;
+  background-image: 
+    radial-gradient(#ff69b422 1.5px, transparent 1.5px),
+    radial-gradient(#ffd70018 1px, transparent 1px);
+  background-size: 24px 24px, 12px 12px;
 }
 
 .bg-diary-grid {
   background-image: radial-gradient(rgba(255, 105, 180, 0.22) 1.2px, transparent 1.2px);
-  background-size: 22px 22px;
+  background-size: 18px 18px;
 }
 
 .bg-lined-paper {
   background-image: repeating-linear-gradient(
     transparent,
     transparent 27px,
-    rgba(255, 182, 193, 0.45) 28px
+    rgba(255, 105, 180, 0.2) 28px
   );
 }
 
-.washi-tape-vibrant {
-  background-color: rgba(255, 182, 193, 0.9);
-  box-shadow: 0 2px 4px rgba(199, 21, 133, 0.15);
-  border-left: 2px dashed rgba(255, 105, 180, 0.7);
-  border-right: 2px dashed rgba(255, 105, 180, 0.7);
+.washi-tape-pink {
+  background: linear-gradient(135deg, rgba(255, 182, 193, 0.9), rgba(255, 105, 180, 0.75));
+  box-shadow: 0 2px 6px rgba(255, 20, 147, 0.15);
+  border-left: 2px dashed rgba(255, 20, 147, 0.4);
+  border-right: 2px dashed rgba(255, 20, 147, 0.4);
+  backdrop-filter: blur(2px);
 }
 
-.washi-tape-gold {
-  background-color: rgba(255, 250, 205, 0.95);
-  box-shadow: 0 2px 4px rgba(199, 21, 133, 0.12);
-  border-left: 2px dashed rgba(234, 179, 8, 0.6);
-  border-right: 2px dashed rgba(234, 179, 8, 0.6);
+.washi-tape-sunshine {
+  background: linear-gradient(135deg, rgba(254, 240, 138, 0.92), rgba(251, 191, 36, 0.8));
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+  border-left: 2px dashed rgba(217, 119, 6, 0.4);
+  border-right: 2px dashed rgba(217, 119, 6, 0.4);
 }
 
-/* 3D perspective for book */
-.perspective-1000 {
+/* 3D Perspective & Book Transformations */
+.perspective-1200 {
   perspective: 1200px;
 }
 
@@ -70,49 +82,57 @@
   backface-visibility: hidden;
 }
 
-/* Floating animation keyframes */
-@keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-14px) rotate(3deg);
-  }
+/* 3D Book Edges & Layers */
+.book-spine-3d {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 32px;
+  transform-origin: left;
+  transform: rotateY(-90deg);
+  background: linear-gradient(to right, #C71585, #FF1493, #FF69B4);
 }
 
-@keyframes floatGentle {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(-2deg);
-  }
+.book-pages-right-3d {
+  position: absolute;
+  right: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 28px;
+  transform-origin: right;
+  transform: rotateY(90deg);
+  background: repeating-linear-gradient(
+    to bottom,
+    #FFFDF9 0px,
+    #FFFDF9 2px,
+    #E8D8C8 3px,
+    #FFFDF9 4px
+  );
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.15);
 }
 
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 28px rgba(255, 20, 147, 0.85);
-  }
+.book-pages-bottom-3d {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: 0;
+  height: 28px;
+  transform-origin: bottom;
+  transform: rotateX(-90deg);
+  background: repeating-linear-gradient(
+    to right,
+    #FFFDF9 0px,
+    #FFFDF9 2px,
+    #E8D8C8 3px,
+    #FFFDF9 4px
+  );
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.15);
 }
 
-.animate-float-slow {
-  animation: floatSlow 4s ease-in-out infinite;
-}
-
-.animate-float-gentle {
-  animation: floatGentle 3s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-
-/* Custom scrollbar in vibrant hot pink */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 9px;
 }
 
 ::-webkit-scrollbar-track {
