@@ -232,7 +232,7 @@ export const DiaryCover: React.FC<DiaryCoverProps> = ({ onOpen, isOpen, coverPho
 
             {/* Cute Scrapbook Stickers on Cover */}
             <div className="absolute top-3.5 right-4 bg-yellow-300 text-yellow-950 text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-md rotate-6 flex items-center gap-1 border border-yellow-400">
-              <span>Sunflower Edition</span> 🌻
+              <span>my little mirasol</span> 🌻
             </div>
 
             <div className="absolute bottom-4 left-10 text-2xl transform -rotate-12 drop-shadow-md">
@@ -259,7 +259,7 @@ export const DiaryCover: React.FC<DiaryCoverProps> = ({ onOpen, isOpen, coverPho
                 Our Love Story
               </h1>
               <p className="font-handwritten text-lg sm:text-xl text-pink-100 font-bold mb-3 drop-shadow-xs flex items-center gap-1">
-                <span>✨ Little Moments With You ✨</span>
+                <span>✨ Moments with you ✨</span>
               </p>
 
               {/* Polaroid Photo Sticker */}

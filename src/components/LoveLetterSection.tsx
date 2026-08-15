@@ -19,14 +19,8 @@ export const LoveLetterSection: React.FC = () => {
   return (
     <section id="surprise-diary" className="pt-4 pb-12 px-2 sm:px-4 max-w-lg mx-auto">
       <div className="text-center mb-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white shadow-md border border-[#FFB6C1] text-[#FF1493] text-[11px] font-extrabold tracking-wider uppercase mb-2.5">
-          <Sparkles className="w-3 h-3 text-[#FF69B4]" />
-          <span>The Final Page</span>
-          <span className="text-yellow-500">🌻</span>
-          <span>A Secret Note</span>
-        </div>
         <h2 className="font-romantic text-2xl sm:text-3xl font-extrabold text-[#C71585] tracking-wide">
-          A Little Note For You 💖
+          My promise to you. 💖
         </h2>
       </div>
 

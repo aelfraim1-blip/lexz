@@ -117,17 +117,6 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ autoStart = true }) =>
   useEffect(() => {
     let isMounted = true;
 
-    const attemptAutoplay = (target: YTPlayerInstance) => {
-      try {
-        target.seekTo(0, true);
-        target.setVolume(volume * 100);
-        target.playVideo();
-        setIsPlaying(true);
-      } catch (e) {
-        console.warn('Autoplay waiting for initial user gesture:', e);
-      }
-    };
-
     const initYouTubePlayer = () => {
       if (!window.YT || !window.YT.Player) return;
 
@@ -155,15 +144,20 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ autoStart = true }) =>
               playerRef.current = event.target;
               setIsPlayerReady(true);
               event.target.setVolume(volume * 100);
-              event.target.seekTo(0, true);
-              setCurrentTime(0);
               const dur = event.target.getDuration();
               if (dur && !isNaN(dur) && dur > 0) {
                 setDuration(dur);
               }
 
-              // Auto-play immediately on launch
-              attemptAutoplay(event.target);
+              if (autoStart) {
+                try {
+                  event.target.playVideo();
+                  setIsPlaying(true);
+                  startTimeTracker();
+                } catch {
+                  // user gesture will trigger it
+                }
+              }
             },
             onStateChange: (event) => {
               if (!isMounted) return;
@@ -171,7 +165,9 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ autoStart = true }) =>
                 setIsPlaying(true);
                 startTimeTracker();
               } else if (
-                event.data === window.YT?.PlayerState.PAUSED
+                event.data === window.YT?.PlayerState.PAUSED ||
+                event.data === window.YT?.PlayerState.CUED ||
+                event.data === window.YT?.PlayerState.UNSTARTED
               ) {
                 setIsPlaying(false);
                 stopTimeTracker();
@@ -212,31 +208,9 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ autoStart = true }) =>
       initYouTubePlayer();
     }
 
-    // Modern browsers require a user interaction to unblock audio autoplay if restricted.
-    const handleFirstGesture = () => {
-      if (playerRef.current) {
-        try {
-          playerRef.current.playVideo();
-          setIsPlaying(true);
-        } catch {
-          // ignore
-        }
-      }
-      window.removeEventListener('pointerdown', handleFirstGesture);
-      window.removeEventListener('keydown', handleFirstGesture);
-      window.removeEventListener('touchstart', handleFirstGesture);
-    };
-
-    window.addEventListener('pointerdown', handleFirstGesture, { once: true });
-    window.addEventListener('keydown', handleFirstGesture, { once: true });
-    window.addEventListener('touchstart', handleFirstGesture, { once: true });
-
     return () => {
       isMounted = false;
       stopTimeTracker();
-      window.removeEventListener('pointerdown', handleFirstGesture);
-      window.removeEventListener('keydown', handleFirstGesture);
-      window.removeEventListener('touchstart', handleFirstGesture);
       if (playerRef.current && typeof playerRef.current.destroy === 'function') {
         try {
           playerRef.current.destroy();
@@ -245,19 +219,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ autoStart = true }) =>
         }
       }
     };
-  }, [volume, isLooping, startTimeTracker, stopTimeTracker]);
-
-  // Handle autoStart prop changes
-  useEffect(() => {
-    if (autoStart && isPlayerReady && playerRef.current && !isPlaying) {
-      try {
-        playerRef.current.playVideo();
-        setIsPlaying(true);
-      } catch {
-        // ignore
-      }
-    }
-  }, [autoStart, isPlayerReady, isPlaying]);
+  }, [startTimeTracker, stopTimeTracker]);
 
   // Play / Pause Toggle
   const togglePlay = () => {
@@ -265,19 +227,23 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ autoStart = true }) =>
 
     try {
       if (isPlaying) {
-        playerRef.current.pauseVideo();
+        if (typeof playerRef.current.pauseVideo === 'function') {
+          playerRef.current.pauseVideo();
+        }
         setIsPlaying(false);
         stopTimeTracker();
       } else {
-        if (currentTime >= duration - 2) {
+        if (typeof playerRef.current.seekTo === 'function' && currentTime >= duration - 2) {
           playerRef.current.seekTo(0, true);
         }
-        playerRef.current.playVideo();
+        if (typeof playerRef.current.playVideo === 'function') {
+          playerRef.current.playVideo();
+        }
         setIsPlaying(true);
         startTimeTracker();
       }
-    } catch {
-      // fallback
+    } catch (e) {
+      console.warn('Playback toggle error:', e);
     }
   };
 
